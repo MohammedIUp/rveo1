@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>قيّم تجربتك معنا – Rate Your Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --star-gold: #f9a825;
+            --star-gray: #e0e0e0;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-gray: #424242;
+            --black: #212121;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            background-color: var(--light-gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .review-container {
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .restaurant-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .restaurant-logo:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--black);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
+
+        .stars-container {
+            margin: 20px 0;
+            direction: ltr;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .star {
+            font-size: 45px;
+            cursor: pointer;
+            color: var(--star-gray);
+            transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
+            user-select: none;
+        }
+
+        .star:hover, .star.active {
+            color: var(--star-gold);
+            transform: scale(1.2);
+        }
+
+        .message-box {
+            min-height: 80px;
+            margin-top: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+            padding: 15px;
+            border-radius: 10px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .message-box.success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .message-box.thanks {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 480px) {
+            .review-container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .star {
+                font-size: 35px;
+                gap: 10px;
+            }
+            .stars {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="review-container">
+        <a href="https://maps.app.goo.gl/XXXXX" target="_blank">
+            <img src="https://i.postimg.cc/KGkcFMgz/image.png" alt="Restaurant Logo" class="restaurant-logo">
+        </a>
+        <h1 lang="ar">قيّم تجربتك معنا</h1>
+        <h1>Rate Your Experience</h1>
+        <p class="subtitle" lang="ar">نقدر رأيك ويهمنا لتحسين خدماتنا</p>
+        <p class="subtitle">Your opinion matters to us and helps us improve</p>
+        <div class="stars-container">
+            <div class="stars">
+                <span class="star" data-value="1">☆</span>
+                <span class="star" data-value="2">☆</span>
+                <span class="star" data-value="3">☆</span>
+                <span class="star" data-value="4">☆</span>
+                <span class="star" data-value="5">☆</span>
+            </div>
+        </div>
+        <div class="message-box">
+            <span lang="ar">اختر عدد النجوم لتقييم تجربتك</span>
+            <span> | Select stars to rate your experience</span>
+        </div>
+        <div class="footer">
+            <p lang="ar">شكراً لزيارتكم</p>
+            <p>Thank you for visiting</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const stars = document.querySelectorAll('.star');
+            const messageBox = document.querySelector('.message-box');
+            const googleReviewLink = 'https://maps.app.goo.gl/XXXXX';
+            let rating = 0;
+
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function () {
+                    const value = parseInt(this.dataset.value);
+                    highlightStars(value);
+                });
+
+                star.addEventListener('mouseout', function () {
+                    highlightStars(rating);
+                });
+
+                star.addEventListener('click', function () {
+                    rating = parseInt(this.dataset.value);
+                    highlightStars(rating);
+                    handleRating(rating);
+                });
+            });
+
+            function highlightStars(value) {
+                stars.forEach(star => {
+                    const starValue = parseInt(star.dataset.value);
+                    if (starValue <= value) {
+                        star.innerHTML = '★';
+                        star.classList.add('active');
+                    } else {
+                        star.innerHTML = '☆';
+                        star.classList.remove('active');
+                    }
+                });
+            }
+
+            function handleRating(value) {
+                messageBox.className = 'message-box';
+
+                if (value >= 4) {
+                    messageBox.classList.add('success');
+                    messageBox.innerHTML = `
+                        <span class="emoji">😍</span>
+                        <div>
+                            <p lang="ar">شكراً لتقييمك الإيجابي! سيتم تحويلك لصفحة جوجل لمشاركة رأيك...</p>
+                            <p>Thank you for your positive rating! Redirecting to Google to share your review...</p>
+                        </div>
+                    `;
+                    setTimeout(() => {
+                        window.location.href = googleReviewLink;
+                    }, 3000);
+                } else {
+                    messageBox.classList.add('thanks');
+                    let emoji = '🙂';
+                    if (value === 1) emoji = '😔';
+                    else if (value === 2) emoji = '😐';
+                    messageBox.innerHTML = `
+                        <span class="emoji">${emoji}</span>
+                        <div>
+                            <p lang="ar">شكراً لتقييمك! نأمل أن نقدّم لك تجربة أفضل في المرة القادمة.</p>
+                            <p>Thank you! We hope to serve you better next time.</p>
+                        </div>
+                    `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
